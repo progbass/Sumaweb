@@ -18,7 +18,7 @@ $id_content_color2: #231f20;
 $id_font: 'Lato', serif;
 $id_font_headers: $id_font;
 
-$header_mobile_height: 90px;
+$header_mobile_height: 75px;
 $footer_height: 35px;
 
 $reference_width: 1920px;
@@ -156,6 +156,7 @@ header{
   background: #fff;
   
   @include transition(all .4s ease-out);
+
   
 
   .wrapper{
@@ -165,6 +166,7 @@ header{
     padding: 10px 0;
     height: 100%;
   }
+
 
   /*/////////////////////////////////////*/
   /* LOGO*/
@@ -183,17 +185,81 @@ header{
 
 
 
+  ///////////////////////////
+  /// MOBILE MENU ICON
+  .mobile_icon{
+    float: right;
+    display: block; 
+    @include vertical-align();
+    position: absolute;
+    right: 20px;
+    margin: auto;
+    width: 20px; height: 20px;
+    
+    color: #666;
+    line-height: 2.5em; 
+    text-transform: uppercase ;
+    @include text-hide();
+    
+    background: url($images_directory+'icon_mobileMenu.svg') no-repeat center top;
+    -webkit-background-size: contain;
+         -o-background-size: contain;
+            background-size: contain;
+    
+
+    &:hover{
+      color: #cacaca;
+      text-decoration: none; 
+    }
+
+    &:before{
+      content: '';
+      display: block;
+      position: relative;
+      width: 100%;
+      padding-bottom: 100%;
+    }
+
+
+    
+    ////////////////////////
+    /// MEDIA QUERIES
+    @media only screen and (min-width : 860px) {
+      display: none 
+    }
+  }
+
+
+
+
 
   /*/////////////////////////////////////*/
   /* MAIN MENU*/
   #main_menu{
-    display: none;
+    //display: none;
+    position: absolute;
+    clear: both;
+    max-height: 0; 
+    width: 100%;
+    overflow: hidden;
+    top: $header_mobile_height;
+
+    background: rgba(255,255,255,.97);
+    text-align: center;
+    font-size: 1.25rem;
+
     @include clearfix(); 
-    position: relative;
+    @include transition(all .32s ease-in-out);
+
+
+    &.active{
+      max-height: 340px; 
+    }
     
 
     /* SEARCH*/
     .search{
+      display: none;
       position: absolute;
       height: 100%;
       
@@ -235,9 +301,11 @@ header{
     /* MENU LIST*/
     ul{
      list-style: none;
-     margin: 0; padding: 0;
+     margin: 0; padding: 1em 0;
 
       li{
+        margin-bottom: .75em;
+
         &:hover,
         &.active{
           a{ color: $id_color; }
@@ -256,12 +324,39 @@ header{
   }
 
 
+
+
+  ////////////////////////
+  /// Hover / Open Menu
+  @media only screen and (max-width: 860px) {
+
+    &:hover{
+
+      #main_menu{
+        //max-height: 340px; 
+      }
+
+      .mobile_icon{
+        //background-position: center;
+      } 
+    }
+  }
+
+
+
   @media screen and (min-width: 860px){
+
+    /*/////////////////////////////////////*/
+    /* MAIN MENU*/
     #main_menu{
+      position: relative;
       display: block;
+      clear: none;
+      text-align: left;
       @include vertical-align();
       float: right;
       min-width: 340px;
+      max-height: none;
       width: percentage(450px/$reference_width);
       
 
@@ -287,6 +382,7 @@ header{
           font-size: 1rem;
           border-left: 1px solid $id_content_color;
           padding: .3em .6em .3em .6em;
+          margin-bottom: 0;
           
           &:nth-child(3n+3){
             padding-right: 0;
@@ -326,6 +422,7 @@ table.main_list{
   background-color: transparent;
   border-collapse: separate;
   border-spacing: 10px;
+  margin-top: -10px;
   width: 100%;
   
   
@@ -595,7 +692,10 @@ ul.main_list{
 
   }
 
-  @media screen and (min-width: 515px){
+  
+
+
+  @media screen and (min-width: 300px){
     padding: 0 $reference_margin;
     
     li{
@@ -605,7 +705,7 @@ ul.main_list{
     }
   }
 
-  @media (min-width: 728px){
+  @media (min-width: $screen-xs-min){
     li{
       width: 33.33%;
     }
@@ -658,6 +758,30 @@ section{
 
   @media screen and (min-width: $screen_xs_max){
     //margin-top: 30px;
+  }
+}
+
+
+
+
+
+/*-------------------------------------------------------------------------------------------------------------------------
+    HOME
+ -------------------------------------------------------------------------------------------------------------------------*/
+section.home{
+  #layout_desktop{
+    display: none;
+  }
+
+
+  @media screen and (min-width: $screen_xs_max){
+    #layout_desktop{
+      display: table;
+    }
+
+    #layout_mobile{
+      display: none;
+    }
   }
 }
 
@@ -778,15 +902,9 @@ section.portfolio{
 
 
 
-  @media screen and (min-width: $screen_sm_max){
-    margin-top: 10px;
-  }
+  @media screen and (min-width: $screen_sm_max){}
 
-
-
-  @media screen and ( min-width: 1280px ){
-    
-  }
+  @media screen and ( min-width: 1280px ){}
 }  
 
 
@@ -812,8 +930,8 @@ section.single{
     padding: 0 12px;
   }
 
-
-  .team_photo{
+  /* COVER FOTO */
+  .cover{
     position: relative;
     width: 100%;
     overflow: hidden;
@@ -829,14 +947,14 @@ section.single{
   /* WORK LIST*/
   ul.work_list{
     position: relative;
-    margin: 0 auto 1em; padding: 0; border: none;
+    margin: 0 auto 5px; padding: 0; border: none;
     //max-width: $reference_max_width;
     
     li{
       position: relative;
       display: block;
       text-align: center;
-      margin-bottom: 2.5rem;
+      margin-bottom: 4px;
       
       &:last-child{
         margin-bottom: 0;
@@ -870,10 +988,27 @@ section.single{
           width: 100%;
         }
 
-        a.more_button{
-          @extend .more_button;
+        a.facebook{
           position: absolute;
-          bottom: 0; right: 0
+          bottom: 0; right: 0;
+          width: 35px;
+          
+          @include text-hide();
+          background: #3b5998 url($images_directory+'icon_facebook_white.svg') no-repeat center;
+
+          @include transition(background-color .2s ease-out);
+        
+          &:before{
+            content: '';
+            display: block;
+            position: relative;
+            width: 100%;
+            padding-bottom: 100%;
+          }
+
+          &:hover{
+            background-color: lighten(#3b5998, 3)
+          }
         }
       }
 
@@ -911,7 +1046,7 @@ section.single{
   @media screen and (min-width: $screen-xs-max ){
     /*padding: 0 2em;*/
 
-    .team_photo{
+    .cover{
 
       &:before{
         content: '';
@@ -921,9 +1056,29 @@ section.single{
         padding-bottom: 50%;
       }
 
+      
+
       img{
-        @include vertical-align();
         position: absolute;
+        top: 0; left: 0;
+        
+        width: 100%;
+        height: auto;
+
+
+        &.horizontal{
+          width: 100% !important;
+          height: auto !important ; 
+          top: 50%;
+          @include transform(translateY(-50%));
+        }
+
+        &.vertical{
+          width: auto !important;
+          height: 100% !important; 
+          left: 50%;
+          @include transform(translateX(-50%));
+        }
       }
     }
     
@@ -1078,11 +1233,9 @@ section.office{
   @media screen and (min-width: $screen-xs-max){
     /* MAP HOLDER*/
     .map_holder{
-      min-height: 380px;
-      height: calc(100vh - #{($header_mobile_height + $footer_height)});
-      /* &:before{*/
-      /*   padding-bottom: 47.619047619%;*/
-      /* }*/
+      height: auto;
+      min-height: auto;
+      //height: calc(100vh - #{($header_mobile_height + $footer_height)});
     }
 
 
@@ -1090,7 +1243,7 @@ section.office{
     .address_holder{
       width: percentage(300px/$reference_width);
       min-width: 350px;
-      padding: 3rem 1em 1.5rem;
+      padding: 1.5rem 1em 1rem;
     }
   }
 }    
@@ -1815,6 +1968,13 @@ footer{
   background: #e4412b;
   text-align: center;
 
+  @include transition(background .1s ease-out);
+
+  &:hover{
+    background: darken(#e4412b, 6%);
+  }
+
+
   // Portfolio Link
   a.portfolio_btn{
     @include text-hide();
@@ -1831,6 +1991,9 @@ footer{
     position: relative;
     width: 20px;
     margin: auto;
+
+    background: url($images_directory+'icon_mosaic.svg') no-repeat center;
+    background-size: contain;
     
     &:before{
       content: '';
@@ -1839,7 +2002,7 @@ footer{
       padding-bottom: 100%; width: 100%;
       top: 0; bottom: 0;
       margin: auto;
-      background: #fff;
+      //background: #fff;
     }
   }
 

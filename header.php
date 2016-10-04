@@ -41,7 +41,8 @@
 				<!-- Main Menu -->
 				<div class="wrapper">
 
-
+					<!-- Mobile Menu Icon -->
+					<a class="mobile_icon">Menu</a>
 
 					<!-- Logo -->
 					<div class="logo">

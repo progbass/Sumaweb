@@ -20,10 +20,25 @@ get_header(); ?>
 		$latest_blog_posts = new WP_Query( array( 'orderby' => 'rand') );
 		if ( $latest_blog_posts->have_posts() ) : ?>
 
+			<!-- LATEST POSTS [MOBILE] --> 
+			<ul class="main_list" id="layout_mobile">
+
+
+			<?php
+			while ( $latest_blog_posts->have_posts() ) : $latest_blog_posts->the_post();
+
+				get_template_part( 'loop' );
 				
+			endwhile; ?>
+
+
+			</ul>
+			<!-- /LATEST POSTS [MOBILE] --> 
+
+
 		
-			<!-- LATEST POSTS -->
-			<table class="main_list">
+			<!-- LATEST POSTS [DESKTOP] -->
+			<table class="main_list" id="layout_desktop">
 				<colgroup class="table_group">
 					<col></col>
 					<col></col>
@@ -78,8 +93,6 @@ get_header(); ?>
 							<div class="content">
 								<h1>Our experience is at the highest levels</h1>
 							</div>
-
-							<a href="#" class="more_button">Ver m&aacute;s</a>
 						</td>
 					<?php
 
@@ -109,7 +122,7 @@ get_header(); ?>
 
 				</tbody>
 			</table>
-			<!-- /LATEST POSTS --> 
+			<!-- /LATEST POSTS [DESKTOP] --> 
 		
 
 		<?php

@@ -111,7 +111,7 @@ get_header(); ?>
 
 
 		<?php
-		if(is_page( 'Contacto' ) || is_page( 'Oficinas' ) ) { ?>
+		if( is_page( 'Oficinas' ) ) { ?>
 
 			<!-- ADDRESS HOLDER --> 
 			<div class="address_holder">

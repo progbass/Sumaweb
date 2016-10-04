@@ -30,6 +30,38 @@ add_filter('nav_menu_css_class' , 'special_nav_class' , 10 , 2);
 
 
 
+/////////////////////////////////////////////////////////////
+// CONVERT URLS TO BITLY SHORTENER
+/////////////////////////////////////////////////////////////
+
+function make_bitly_url($url){
+	
+	//Properties
+	$appkey = '12c4dafc84295a965f6f76af1f79eddfb443428a';
+	$format = 'txt';
+	$version = '2.0.1';
+	
+	//call Bitly API
+	$bitly = 'https://api-ssl.bitly.com/v3/shorten?longUrl='.urlencode($url).'&access_token='.$appkey.'&format='.$format;
+
+	$ch = curl_init();
+	curl_setopt ($ch, CURLOPT_URL, $bitly);
+	curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
+	$response = curl_exec($ch);
+	curl_close($ch);
+	
+	//get the shortened URL
+	//$response = file_get_contents($bitly);
+	
+	return $response ? trim($response) : $url;
+}
+
+
+
+
+
+
+
 
 
 

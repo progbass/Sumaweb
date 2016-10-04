@@ -4,29 +4,18 @@ var marker_latLng ={lat: 19.4005873, lng: -99.1824463};
 
 (function($) {
 
+	
 	//----------------------------------------------------------------------//
-	//--------------------------  PORTFOLIO LIST  --------------------------//
+	//-----------------------------  MAIN MENU  ----------------------------//
 	//----------------------------------------------------------------------//
 	//  Enable Click on <li> item
-	$('ul.main_list li').each( function(_index, _target){
-		$(_target).click(function(e){
-			e.preventDefault();
-			var project_link = $(this).find('a.project_link').attr('href');
-			if(project_link != '#'){
-				window.location = project_link;
-			}
-		});
+	$('header a.mobile_icon').click( function( e ){
+		e.preventDefault();
+		$('#main_menu').toggleClass('active');
 	} );
 
-	$('table.main_list td').each( function(_index, _target){
-		$(_target).click(function(e){
-			e.preventDefault();
-			var project_link = $(this).find('a.project_link').attr('href');
-			if(project_link != '#'){
-				window.location = project_link;
-			}
-		});
-	} );
+
+
 
 
 
@@ -53,11 +42,42 @@ var marker_latLng ={lat: 19.4005873, lng: -99.1824463};
 
 
 	//----------------------------------------------------------------------//
-	//-----------------------------  PORTFOLIO  ----------------------------//
+	//------------------------  PORTFOLIO MAIN LIST  -----------------------//
 	//----------------------------------------------------------------------//
-	$("section.single a.more_button").click( function(){
+	//  Enable Click on <li> item
+	$('ul.main_list li').each( function(_index, _target){
+		$(_target).click(function(e){
+			e.preventDefault();
+			var project_link = $(this).find('a.project_link').attr('href');
+			if(project_link != '#'){
+				window.location = project_link;
+			}
+		});
+	} );
 
-		if( $("section.single ul.work_list li.info").hasClass('full') ){
+	$('table.main_list td').each( function(_index, _target){
+		$(_target).click(function(e){
+			e.preventDefault();
+			var project_link = $(this).find('a.project_link').attr('href');
+			if(project_link != '#'){
+				window.location = project_link;
+			}
+		});
+	} );
+
+
+
+
+
+
+	//----------------------------------------------------------------------//
+	//------------------------------  ARTICLE  -----------------------------//
+	//----------------------------------------------------------------------//
+	$("section.single a.more_button").click( function(e){
+		e.preventDefault();
+
+
+		/* if( $("section.single ul.work_list li.info").hasClass('full') ){
 			$("section.single ul.work_list li.info").toggleClass('full', false);
 			$("section.single ul.work_list li.info a.more_button").toggleClass('open', false);
 
@@ -70,8 +90,25 @@ var marker_latLng ={lat: 19.4005873, lng: -99.1824463};
 
 			$("section.single ul.work_list li.info .content_holder").fadeOut();
 			$("section.single ul.work_list li.info .full_content").fadeIn();
-		}
+		} */
 	} );
+
+
+	//////////////
+	/// FANCYBOX
+	$('.fancybox').fancybox({
+		//autoSize: true,
+		//autoHeight: false,
+		//maxWidth: '85%',
+        padding : 0,
+        closeBtn: false
+    });
+
+
+
+
+
+	
 
 
 
@@ -96,21 +133,29 @@ var marker_latLng ={lat: 19.4005873, lng: -99.1824463};
 		}, 3000);
 	}
 
+
+
+
+
+
+
+	//----------------------------------------------------------------------//
+	//-------------------------------  OFFICE  -----------------------------//
+	//----------------------------------------------------------------------//
+	// Map Height
+	var mapDifference = $('header').outerHeight(true) + $('footer').outerHeight(true) + $("section.office .address_holder").outerHeight(true);
+	$("section.office .map_holder").css('height', 'calc(100vh - '+mapDifference+'px)')
+
 	
 
 
 
-	$('.fancybox').fancybox({
-		//autoSize: true,
-		//autoHeight: false,
-		//maxWidth: '85%',
-        padding : 0,
-        closeBtn: false
-    });
 
 
 
-
+	//----------------------------------------------------------------------//
+	//-------------------------------  RESIZE  -----------------------------//
+	//----------------------------------------------------------------------//
     $(window).on('resize', function(){
     	if(map){
     		map.setCenter(marker_latLng);
@@ -119,9 +164,46 @@ var marker_latLng ={lat: 19.4005873, lng: -99.1824463};
 
 
 
+
+
+
+
+
+
+    ////////////////////////////////////////////////////////
+	/// FORMAT IMAGES (VERTICAL/HORIZONTAL)
+	////////////////////////////////////////////////////////
+	function formatThumbnails(_target){
+		$(_target).each(function(_index, _target){
+			var target = $(this);
+			var holder_ratio = target.height()/target.width();
+
+			var image = target.find('img');
+			var image_ratio = image.height()/image.width(); 
+			var image_class = image_ratio <= holder_ratio ? 'vertical' : 'horizontal';
+			image.removeClass('vertical horizontal').addClass(image_class);			
+		});
+	}
+	setTimeout(function(){
+		formatThumbnails( $('section.single .cover') );
+	}, 1000);
+ 
+
+
 })(jQuery);
 
 
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////
+// INIT MAP
+/////////////////////////////////////////////////////////////
 function initMap() {
 	if(document.getElementById('gMap')){
 
@@ -138,5 +220,63 @@ function initMap() {
           position: marker_latLng,
           title: 'Sumaweb'
         });
+
+        // Reposition Marker on change
+        map.addListener('center_changed', function() {
+          window.setTimeout(function() {
+            map.panTo(marker.getPosition());
+          }, 3000);
+        });
+
+        // Marker Click Event
+        marker.addListener('click', function() {
+        	// Got to gMaps Link
+        	window.location = 'https://goo.gl/maps/9FM61L1gsnp';
+        });
 	}
 }
+
+
+
+
+/////////////////////////////////////////////////////////////
+// SOCIAL SHARE
+/////////////////////////////////////////////////////////////
+function socialShare(id, urlpost, titles){
+	//properties
+	var source = urlpost;
+	var url="";
+	
+	
+	//Choose Social Network
+	switch(id){
+		case 'facebook':
+			url = 'https://www.facebook.com/sharer/sharer.php?u=' + source;
+			break;
+			
+		case 'twitter':
+			title = encodeURIComponent(titles);
+			url = 'https://twitter.com/intent/tweet?text='+title+'&url='+source;
+			break;
+			
+		default:
+			break;
+	}
+	
+	
+	//Pop up settings
+	var w = 500;
+	var h = 250;
+	var left = (screen.width/2)-(w/2);
+	var top = (screen.height/2)-(h/2);
+	
+	//open popup
+	myWindow = window.open (url, 'win_share','width='+w+',height='+h+', top='+top+', left='+left);
+
+	//
+	return false;
+};
+
+
+
+

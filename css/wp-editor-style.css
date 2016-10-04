@@ -5635,7 +5635,7 @@ button.close {
 .invisible {
   visibility: hidden; }
 
-.text-hide, .more_button, table.main_list tr td.highlight a.more_button, section.about ul.main_list li .overlay a.more_button, section.single ul.work_list li.info a.more_button, section.blog ul.blog_list li .cover a.more_button, section.single_blog .cover a.more_button {
+.text-hide, .more_button, table.main_list tr td.highlight a.more_button, section.about ul.main_list li .overlay a.more_button, section.blog ul.blog_list li .cover a.more_button, section.single_blog .cover a.more_button {
   font: 0/0 a;
   color: transparent;
   text-shadow: none;
@@ -5830,7 +5830,7 @@ body {
   font-family: "Lato", serif;
   background: #fff;
   color: #666666;
-  padding-top: 90px;
+  padding-top: 75px;
   min-height: 100%; }
   @media screen and (min-width: 767px) {
     body {
@@ -5845,7 +5845,7 @@ a {
   a:hover {
     text-decoration: none; }
 
-.more_button, table.main_list tr td.highlight a.more_button, section.about ul.main_list li .overlay a.more_button, section.single ul.work_list li.info a.more_button, section.blog ul.blog_list li .cover a.more_button, section.single_blog .cover a.more_button {
+.more_button, table.main_list tr td.highlight a.more_button, section.about ul.main_list li .overlay a.more_button, section.blog ul.blog_list li .cover a.more_button, section.single_blog .cover a.more_button {
   position: relative;
   width: 35px;
   height: 35px;
@@ -5854,7 +5854,7 @@ a {
   background: #f5821f;
   color: #fff;
   text-align: center; }
-  .more_button:before, table.main_list tr td.highlight a.more_button:before, section.about ul.main_list li .overlay a.more_button:before, section.single ul.work_list li.info a.more_button:before, section.blog ul.blog_list li .cover a.more_button:before, section.single_blog .cover a.more_button:before {
+  .more_button:before, table.main_list tr td.highlight a.more_button:before, section.about ul.main_list li .overlay a.more_button:before, section.blog ul.blog_list li .cover a.more_button:before, section.single_blog .cover a.more_button:before {
     content: '';
     display: block;
     position: absolute;
@@ -5867,7 +5867,7 @@ a {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); }
-  .more_button:after, table.main_list tr td.highlight a.more_button:after, section.about ul.main_list li .overlay a.more_button:after, section.single ul.work_list li.info a.more_button:after, section.blog ul.blog_list li .cover a.more_button:after, section.single_blog .cover a.more_button:after {
+  .more_button:after, table.main_list tr td.highlight a.more_button:after, section.about ul.main_list li .overlay a.more_button:after, section.blog ul.blog_list li .cover a.more_button:after, section.single_blog .cover a.more_button:after {
     content: '';
     display: block;
     position: absolute;
@@ -5880,9 +5880,9 @@ a {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) rotate(90deg); }
-  .more_button.open:after, table.main_list tr td.highlight a.open.more_button:after, section.about ul.main_list li .overlay a.open.more_button:after, section.single ul.work_list li.info a.open.more_button:after, section.blog ul.blog_list li .cover a.open.more_button:after, section.single_blog .cover a.open.more_button:after {
+  .more_button.open:after, table.main_list tr td.highlight a.open.more_button:after, section.about ul.main_list li .overlay a.open.more_button:after, section.blog ul.blog_list li .cover a.open.more_button:after, section.single_blog .cover a.open.more_button:after {
     opacity: 0; }
-  .more_button.open:after, table.main_list tr td.highlight a.open.more_button:after, section.about ul.main_list li .overlay a.open.more_button:after, section.single ul.work_list li.info a.open.more_button:after, section.blog ul.blog_list li .cover a.open.more_button:after, section.single_blog .cover a.open.more_button:after {
+  .more_button.open:after, table.main_list tr td.highlight a.open.more_button:after, section.about ul.main_list li .overlay a.open.more_button:after, section.blog ul.blog_list li .cover a.open.more_button:after, section.single_blog .cover a.open.more_button:after {
     transform: rotate(0deg); }
 
 .fancybox-inner {
@@ -5902,8 +5902,8 @@ header {
   bottom: 0;
   z-index: 60;
   padding: 0 12px;
-  height: 90px;
-  min-height: 90px;
+  height: 75px;
+  min-height: 75px;
   font-weight: 300;
   line-height: 1;
   background: #fff;
@@ -5945,9 +5945,54 @@ header {
       /*width: percentage(180/320);//100%;*/
       width: 100%;
       height: auto; }
-  header #main_menu {
-    display: none;
+  header .mobile_icon {
+    float: right;
+    display: block;
     position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    position: absolute;
+    right: 20px;
+    margin: auto;
+    width: 20px;
+    height: 20px;
+    color: #666;
+    line-height: 2.5em;
+    text-transform: uppercase;
+    font: 0/0 a;
+    color: transparent;
+    text-shadow: none;
+    background-color: transparent;
+    border: 0;
+    background: url("images/icon_mobileMenu.svg") no-repeat center top;
+    -webkit-background-size: contain;
+    -o-background-size: contain;
+    background-size: contain; }
+    header .mobile_icon:hover {
+      color: #cacaca;
+      text-decoration: none; }
+    header .mobile_icon:before {
+      content: '';
+      display: block;
+      position: relative;
+      width: 100%;
+      padding-bottom: 100%; }
+    @media only screen and (min-width: 860px) {
+      header .mobile_icon {
+        display: none; } }
+  header #main_menu {
+    position: absolute;
+    clear: both;
+    max-height: 0;
+    width: 100%;
+    overflow: hidden;
+    top: 75px;
+    background: rgba(255, 255, 255, 0.97);
+    text-align: center;
+    font-size: 1.25rem;
+    -webkit-transition: all 0.32s ease-in-out;
+    -o-transition: all 0.32s ease-in-out;
+    transition: all 0.32s ease-in-out;
     /* SEARCH*/
     /* MOBILE MENU ICON*/
     /* MENU LIST*/ }
@@ -5956,7 +6001,10 @@ header {
       display: table; }
     header #main_menu:after {
       clear: both; }
+    header #main_menu.active {
+      max-height: 340px; }
     header #main_menu .search {
+      display: none;
       position: absolute;
       height: 100%; }
       header #main_menu .search a {
@@ -5988,46 +6036,56 @@ header {
     header #main_menu ul {
       list-style: none;
       margin: 0;
-      padding: 0; }
-      header #main_menu ul li:hover a, header #main_menu ul li.active a {
-        color: #f5821f; }
-      header #main_menu ul li a {
-        color: #666666;
-        text-decoration: none;
-        -webkit-transition: color 0.12s ease-out;
-        -o-transition: color 0.12s ease-out;
-        transition: color 0.12s ease-out; }
-      header #main_menu ul li input {
-        display: none; }
+      padding: 1em 0; }
+      header #main_menu ul li {
+        margin-bottom: .75em; }
+        header #main_menu ul li:hover a, header #main_menu ul li.active a {
+          color: #f5821f; }
+        header #main_menu ul li a {
+          color: #666666;
+          text-decoration: none;
+          -webkit-transition: color 0.12s ease-out;
+          -o-transition: color 0.12s ease-out;
+          transition: color 0.12s ease-out; }
+        header #main_menu ul li input {
+          display: none; }
   @media screen and (min-width: 860px) {
-    header #main_menu {
-      display: block;
-      position: relative;
-      top: 50%;
-      transform: translateY(-50%);
-      float: right;
-      min-width: 340px;
-      width: 23.4375%; }
-      header #main_menu .search {
+    header {
+      /*/////////////////////////////////////*/
+      /* MAIN MENU*/ }
+      header #main_menu {
+        position: relative;
+        display: block;
+        clear: none;
+        text-align: left;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
         float: right;
-        width: 12%;
-        border-right: 10px solid transparent; }
-      header #main_menu a.mobile_icon {
-        display: none; }
-      header #main_menu ul {
-        float: right;
-        width: 88%;
-        font-size: 0; }
-        header #main_menu ul li {
-          display: inline-block;
-          width: 33.333%;
-          font-size: 1rem;
-          border-left: 1px solid #666666;
-          padding: .3em .6em .3em .6em; }
-          header #main_menu ul li:nth-child(3n+3) {
-            padding-right: 0; }
-          header #main_menu ul li a {
-            font-size: 1em; } }
+        min-width: 340px;
+        max-height: none;
+        width: 23.4375%; }
+        header #main_menu .search {
+          float: right;
+          width: 12%;
+          border-right: 10px solid transparent; }
+        header #main_menu a.mobile_icon {
+          display: none; }
+        header #main_menu ul {
+          float: right;
+          width: 88%;
+          font-size: 0; }
+          header #main_menu ul li {
+            display: inline-block;
+            width: 33.333%;
+            font-size: 1rem;
+            border-left: 1px solid #666666;
+            padding: .3em .6em .3em .6em;
+            margin-bottom: 0; }
+            header #main_menu ul li:nth-child(3n+3) {
+              padding-right: 0; }
+            header #main_menu ul li a {
+              font-size: 1em; } }
 
 /*-------------------------------------------------------------------------------------------------------------------------
     LATEST POSTS LIST
@@ -6038,6 +6096,7 @@ table.main_list {
   background-color: transparent;
   border-collapse: separate;
   border-spacing: 10px;
+  margin-top: -10px;
   width: 100%;
   /* TABLE ROW*/ }
   table.main_list tr {
@@ -6129,7 +6188,7 @@ table.main_list {
             position: relative;
             width: 100%;
             padding-bottom: 76.203208556%; }
-        table.main_list tr td.highlight a.more_button, table.main_list tr td.highlight section.about ul.main_list li .overlay a.more_button, section.about ul.main_list li .overlay table.main_list tr td.highlight a.more_button, table.main_list tr td.highlight section.single ul.work_list li.info a.more_button, section.single ul.work_list li.info table.main_list tr td.highlight a.more_button, table.main_list tr td.highlight section.blog ul.blog_list li .cover a.more_button, section.blog ul.blog_list li .cover table.main_list tr td.highlight a.more_button {
+        table.main_list tr td.highlight a.more_button, table.main_list tr td.highlight section.about ul.main_list li .overlay a.more_button, section.about ul.main_list li .overlay table.main_list tr td.highlight a.more_button, table.main_list tr td.highlight section.blog ul.blog_list li .cover a.more_button, section.blog ul.blog_list li .cover table.main_list tr td.highlight a.more_button {
           position: absolute;
           bottom: 0;
           right: 0; }
@@ -6225,7 +6284,7 @@ ul.main_list {
       color: #000; }
     ul.main_list li .excerpt {
       display: none; }
-  @media screen and (min-width: 515px) {
+  @media screen and (min-width: 300px) {
     ul.main_list {
       padding: 0 5px; }
       ul.main_list li {
@@ -6233,7 +6292,7 @@ ul.main_list {
         border: solid 5px transparent;
         border-top: none;
         border-bottom: none; } }
-  @media (min-width: 728px) {
+  @media (min-width: 480px) {
     ul.main_list li {
       width: 33.33%; } }
   @media (min-width: 991px) {
@@ -6256,6 +6315,18 @@ section {
       height: auto !important; }
 
 /*-------------------------------------------------------------------------------------------------------------------------
+    HOME
+ -------------------------------------------------------------------------------------------------------------------------*/
+section.home #layout_desktop {
+  display: none; }
+
+@media screen and (min-width: 767px) {
+  section.home #layout_desktop {
+    display: table; }
+  section.home #layout_mobile {
+    display: none; } }
+
+/*-------------------------------------------------------------------------------------------------------------------------
     TEMPLATE: ABOUT
  -------------------------------------------------------------------------------------------------------------------------*/
 section.about {
@@ -6265,7 +6336,7 @@ section.about {
   /*/ MEDIA QUERIES*/ }
   section.about .team_photo {
     position: relative; }
-    section.about .team_photo a.more_button, section.about .team_photo table.main_list tr td.highlight a.more_button, table.main_list tr td.highlight section.about .team_photo a.more_button, section.about .team_photo ul.main_list li .overlay a.more_button, section.about ul.main_list li .overlay .team_photo a.more_button, section.about .team_photo section.single ul.work_list li.info a.more_button, section.single ul.work_list li.info section.about .team_photo a.more_button, section.about .team_photo section.blog ul.blog_list li .cover a.more_button, section.blog ul.blog_list li .cover section.about .team_photo a.more_button {
+    section.about .team_photo a.more_button, section.about .team_photo table.main_list tr td.highlight a.more_button, table.main_list tr td.highlight section.about .team_photo a.more_button, section.about .team_photo ul.main_list li .overlay a.more_button, section.about ul.main_list li .overlay .team_photo a.more_button, section.about .team_photo section.blog ul.blog_list li .cover a.more_button, section.blog ul.blog_list li .cover section.about .team_photo a.more_button {
       position: absolute;
       bottom: 0;
       right: 0; }
@@ -6300,9 +6371,6 @@ section.portfolio {
     section.portfolio ul.main_list li .overlay {
       font-size: 1rem;
       color: #fff; } }
-  @media screen and (min-width: 991px) {
-    section.portfolio {
-      margin-top: 10px; } }
 
 /*-------------------------------------------------------------------------------------------------------------------------
     TEMPLATE: SINGLE
@@ -6311,6 +6379,7 @@ section.single {
   width: 100%;
   padding: 0 5px;
   /* TITLE*/
+  /* COVER FOTO */
   /* INFO HOLDER*/
   /* WORK LIST*/
   /*//////////////////////////////////////*/
@@ -6319,7 +6388,7 @@ section.single {
     font-weight: 300;
     font-size: 1em;
     padding: 0 12px; }
-  section.single .team_photo {
+  section.single .cover {
     position: relative;
     width: 100%;
     overflow: hidden; }
@@ -6327,14 +6396,14 @@ section.single {
     margin-bottom: 15px; }
   section.single ul.work_list {
     position: relative;
-    margin: 0 auto 1em;
+    margin: 0 auto 5px;
     padding: 0;
     border: none; }
     section.single ul.work_list li {
       position: relative;
       display: block;
       text-align: center;
-      margin-bottom: 2.5rem; }
+      margin-bottom: 4px; }
       section.single ul.work_list li:last-child {
         margin-bottom: 0; }
       section.single ul.work_list li.info {
@@ -6355,10 +6424,28 @@ section.single {
           top: 0;
           padding: 1em 0;
           width: 100%; }
-        section.single ul.work_list li.info a.more_button {
+        section.single ul.work_list li.info a.facebook {
           position: absolute;
           bottom: 0;
-          right: 0; }
+          right: 0;
+          width: 35px;
+          font: 0/0 a;
+          color: transparent;
+          text-shadow: none;
+          background-color: transparent;
+          border: 0;
+          background: #3b5998 url("images/icon_facebook_white.svg") no-repeat center;
+          -webkit-transition: background-color 0.2s ease-out;
+          -o-transition: background-color 0.2s ease-out;
+          transition: background-color 0.2s ease-out; }
+          section.single ul.work_list li.info a.facebook:before {
+            content: '';
+            display: block;
+            position: relative;
+            width: 100%;
+            padding-bottom: 100%; }
+          section.single ul.work_list li.info a.facebook:hover {
+            background-color: #3f5fa3; }
       section.single ul.work_list li p {
         margin: 1em auto; }
       section.single ul.work_list li img {
@@ -6375,17 +6462,36 @@ section.single {
       /*padding: 0 2em;*/
       /* INFO HOLDER*/
       /* WORK LIST*/ }
-      section.single .team_photo:before {
+      section.single .cover:before {
         content: '';
         display: block;
         position: relative;
         width: 100%;
         padding-bottom: 50%; }
-      section.single .team_photo img {
-        position: relative;
-        top: 50%;
-        transform: translateY(-50%);
-        position: absolute; }
+      section.single .cover img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto; }
+        section.single .cover img.horizontal {
+          width: 100% !important;
+          height: auto !important;
+          top: 50%;
+          -webkit-transform: translateY(-50%);
+          -moz-transform: translateY(-50%);
+          -ms-transform: translateY(-50%);
+          -o-transform: translateY(-50%);
+          transform: translateY(-50%); }
+        section.single .cover img.vertical {
+          width: auto !important;
+          height: 100% !important;
+          left: 50%;
+          -webkit-transform: translateX(-50%);
+          -moz-transform: translateX(-50%);
+          -ms-transform: translateX(-50%);
+          -o-transform: translateX(-50%);
+          transform: translateX(-50%); }
       section.single .info_holder {
         width: 50%; }
       section.single ul.work_list {
@@ -6464,7 +6570,7 @@ section.office {
     margin-bottom: 4px;
     width: 100%;
     min-height: 360px;
-    height: calc(100vh - 90px);
+    height: calc(100vh - 75px);
     /*max-height: 360px;*/
     /* &:before{*/
     /*   content: '';*/
@@ -6490,15 +6596,12 @@ section.office {
       /* MAP HOLDER*/
       /* ADDRESS*/ }
       section.office .map_holder {
-        min-height: 380px;
-        height: calc(100vh - 125px);
-        /* &:before{*/
-        /*   padding-bottom: 47.619047619%;*/
-        /* }*/ }
+        height: auto;
+        min-height: auto; }
       section.office .address_holder {
         width: 15.625%;
         min-width: 350px;
-        padding: 3rem 1em 1.5rem; } }
+        padding: 1.5rem 1em 1rem; } }
 
 /*-------------------------------------------------------------------------------------------------------------------------
     TEMPLATE: CONTACT
@@ -6856,7 +6959,7 @@ section.single_blog {
       position: absolute;
       width: 100%;
       height: auto; }
-    section.single_blog .cover table.main_list tr td.highlight a.more_button, table.main_list tr td.highlight section.single_blog .cover a.more_button, section.single_blog .cover section.about ul.main_list li .overlay a.more_button, section.about ul.main_list li .overlay section.single_blog .cover a.more_button, section.single_blog .cover section.single ul.work_list li.info a.more_button, section.single ul.work_list li.info section.single_blog .cover a.more_button, section.single_blog section.blog ul.blog_list li .cover a.more_button, section.blog ul.blog_list li section.single_blog .cover a.more_button, section.single_blog .cover a.more_button {
+    section.single_blog .cover table.main_list tr td.highlight a.more_button, table.main_list tr td.highlight section.single_blog .cover a.more_button, section.single_blog .cover section.about ul.main_list li .overlay a.more_button, section.about ul.main_list li .overlay section.single_blog .cover a.more_button, section.single_blog section.blog ul.blog_list li .cover a.more_button, section.blog ul.blog_list li section.single_blog .cover a.more_button, section.single_blog .cover a.more_button {
       position: absolute;
       bottom: 0;
       right: 0; }
@@ -6902,7 +7005,12 @@ footer {
   color: #fff;
   background: #e4412b;
   text-align: center;
+  -webkit-transition: background 0.1s ease-out;
+  -o-transition: background 0.1s ease-out;
+  transition: background 0.1s ease-out;
   /*/ ICON*/ }
+  footer:hover {
+    background: #d5311b; }
   footer a.portfolio_btn {
     font: 0/0 a;
     color: transparent;
@@ -6921,7 +7029,9 @@ footer {
     transform: translateY(-50%);
     position: relative;
     width: 20px;
-    margin: auto; }
+    margin: auto;
+    background: url("images/icon_mosaic.svg") no-repeat center;
+    background-size: contain; }
     footer .icon:before {
       content: '';
       display: block;
@@ -6930,8 +7040,7 @@ footer {
       width: 100%;
       top: 0;
       bottom: 0;
-      margin: auto;
-      background: #fff; }
+      margin: auto; }
   @media screen and (min-width: 767px) {
     footer {
       display: block;

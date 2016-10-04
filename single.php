@@ -23,7 +23,7 @@ get_header(); ?>
 				$image = get_field('cover_image');
 				if( $image ){ ?>
 					<!-- MAIN PHOTO --> 
-					<div class="team_photo">
+					<div class="team_photo cover">
 			        	<img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" />
 					</div>				
 					<!-- /MAIN PHOTO -->
@@ -50,7 +50,17 @@ get_header(); ?>
 				<ul class="work_list">
 					<li class="info">
 						<div class="content_holder">
-							<?php the_excerpt(); ?>
+
+							<?php
+							if(get_field('content_col_left')): 
+								the_field('content_col_left');
+							endif; ?>
+
+
+							<?php
+							if(get_field('content_col_right')): 
+								the_field('content_col_right');
+							endif; ?>
 						</div>
 
 						<div class="full_content">
@@ -78,7 +88,7 @@ get_header(); ?>
 
 						</div>
 
-						<a class="more_button">Más Info</a>
+						<a href="#" onclick="socialShare('facebook', '<?php echo make_bitly_url( get_the_permalink() ); ?>', '<?php the_title(); ?>');" class="facebook">Más Info</a>
 					</li>
 
 
