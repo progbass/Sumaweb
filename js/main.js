@@ -4,7 +4,34 @@ var marker_latLng ={lat: 19.4005873, lng: -99.1824463};
 
 (function($) {
 
+	//----------------------------------------------------------------------//
+	//-----------------------------  PRELOADER  ----------------------------//
+	//----------------------------------------------------------------------//
+	var images_array = Array();
+	$('img').each(function(_index, _target){
+		images_array.push( $(_target).attr('src') );
+	});
+	new preLoader(images_array, {
+	    onProgress: function(img, imageEl, index){
+	        var percent = Math.floor((100 / this.queue.length) * this.completed.length);
+	    }, 
+	    onComplete: function(loaded, errors){
+	        //console.log('done', loaded);
+	        
+	        // Show content
+	        $('#app_preloader').addClass('outro');
+
+			setTimeout(function(){
+				$('body').removeClass('loading');
+			}, 160);
+	    }
+	});
+
+
+
 	
+
+
 	//----------------------------------------------------------------------//
 	//-----------------------------  MAIN MENU  ----------------------------//
 	//----------------------------------------------------------------------//
@@ -205,13 +232,19 @@ var marker_latLng ={lat: 19.4005873, lng: -99.1824463};
 // INIT MAP
 /////////////////////////////////////////////////////////////
 function initMap() {
+	var drag_flag = true;
+	if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+		drag_flag =  false;
+	}
+
 	if(document.getElementById('gMap')){
 
 		// Create a map object and specify the DOM element for display.
 		map = new google.maps.Map(document.getElementById('gMap'), {
 			center: marker_latLng,
 			scrollwheel: false,
-			zoom: 16 
+			zoom: 16,
+			draggable: drag_flag,
 		});
 
         // Create a marker and set its position.
@@ -234,6 +267,8 @@ function initMap() {
         	window.location = 'https://goo.gl/maps/9FM61L1gsnp';
         });
 	}
+
+
 }
 
 
@@ -276,6 +311,8 @@ function socialShare(id, urlpost, titles){
 	//
 	return false;
 };
+
+
 
 
 

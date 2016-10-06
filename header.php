@@ -27,10 +27,14 @@
 
 
 
-	<body <?php body_class(); ?>>
+	<body <?php body_class('loading'); ?> >
+
+		<div id="app_preloader">
+			<div class="icon"></div>
+		</div>
 
 
-		<div class="main_container">
+		<div id="app_content" class="main_container">
 
 
 			<!--=========================================

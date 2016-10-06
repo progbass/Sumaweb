@@ -53,6 +53,29 @@ body{
   @media screen and (min-width: $screen-xs-max){
     padding-bottom: 35px;
   }
+
+
+
+  #app_preloader{
+    display: none;
+  }
+  #app_content{
+    opacity: 1;
+    visibility: visible;
+    @include transition(opacity .8s);
+  }
+
+  &.loading{
+    overflow: hidden;
+
+    #app_preloader{
+      display: block;
+    }
+    #app_content{
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
 }
 
 
@@ -132,7 +155,126 @@ a{
 
 
 
+/*-------------------------------------------------------------------------------------------------------------------------
+  PRELOADER
+-------------------------------------------------------------------------------------------------------------------------*/
+@include keyframes(preloader_horizontal_animation){
+  0% {
+    opacity: 0;
+    @include transform(scale(0, 1));
+  }
+  25% {
+    opacity: 1;
+    @include transform(scale(1, 1));
+  }
+  75% {
+    opacity: 1;
+    @include transform(scale(1, 1));
+  }
+  100% {
+    opacity: 0;
+    @include transform(scale(0, 1));
+  }
+}
 
+@include keyframes(preloader_vertical_animation){
+  0% {
+    opacity: 1;
+    @include transform(scale(1, 0) rotate(-90deg));
+  }
+  25% {
+    @include transform(scale(1, 1) rotate(-90deg));
+  }
+  75% {
+    @include transform(scale(1, 1) rotate(-90deg));
+  }
+  100% {
+    opacity: 1;
+    @include transform(scale(1, 0) rotate(-90deg));
+  }
+}
+
+@include keyframes(preloader_rotation_animation){
+  0% {
+    @include transform(rotate(0deg));
+  }
+  22% {
+    @include transform(rotate(90deg));
+  }
+  100% {
+    @include transform(rotate(90deg));
+  }
+}
+
+
+@include keyframes(preloader_outro_animation){
+  0% {
+    opacity: 1;
+    @include transform(translateY(0%));
+  }
+  100% {
+    opacity: 0;
+    @include transform(translateY(-20%));
+  }
+}
+
+
+#app_preloader{
+  position: fixed;
+  width: 4vw;
+  max-width: 30px;
+  left: 50%; top: 50%;
+  @include transform( translate(-50%, -50%) );
+
+  &.outro{
+    .icon{
+      @include animation(preloader_outro_animation .8s ease-in-out );
+    }
+  }
+
+
+  &:before{
+    content: '';
+    position: absolute;
+    display: block;
+    width: 100%;
+    padding-bottom: 100%;
+  }
+
+
+  .icon{
+    position: absolute;
+    width: 100%; height: 100%;
+    //@include transform-origin(center);
+    @include animation(preloader_rotation_animation 1.2s ease-out infinite );
+    //@include vertical-align();
+
+    &:before{
+      content: '';
+      position: absolute;
+      display: block;
+      width: 100%;
+      padding-bottom: 12%;
+      background-color: $id_color;
+      @include transform-origin(center);
+      //@include animation(preloader_horizontal_animation 1s ease-in-out infinite );
+    }
+
+    &:after{
+      content: '';
+      position: absolute;
+      display: block;
+      width: 100%;
+      padding-bottom: 12%;
+      background-color: $id_color; 
+      @include transform( rotate(-90deg) );
+      @include transform-origin(center);
+
+      //@include animation(preloader_vertical_animation 1s ease-in-out infinite );
+      @include animation-delay(.03s);
+    }
+  }
+}
 
 
 
@@ -421,7 +563,7 @@ table.main_list{
   max-width: 100%;
   background-color: transparent;
   border-collapse: separate;
-  border-spacing: 10px;
+  border-spacing: $reference_margin;
   margin-top: -10px;
   width: 100%;
   
@@ -616,7 +758,7 @@ ul.main_list{
     float: left;
     display: inline-block;
     overflow: hidden;
-    margin: 0 auto $reference_margin*2;
+    margin: 0 auto $reference_margin;
     width: 100%;
 
     // Hover
@@ -696,11 +838,11 @@ ul.main_list{
 
 
   @media screen and (min-width: 300px){
-    padding: 0 $reference_margin;
+    padding: 0;//$reference_margin;
     
     li{
       width: 50%;
-      border: solid $reference_margin transparent;
+      border: solid $reference_margin/2 transparent;
       border-top: none; border-bottom: none;
     }
   }
