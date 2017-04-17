@@ -10,6 +10,7 @@ dist
 # Dependency directories
 grunt/node_modules
 grunt/.sass-cache
+.sass-cache
 
 # Sublime Project
 Sumaweb.sublime-project
